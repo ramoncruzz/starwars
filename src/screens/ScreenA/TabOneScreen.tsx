@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text, View } from '../../components/Themed';
+import { Text, View } from '../../../components/Themed';
 import styles from './styles';
 export default function TabOneScreen() {
   return (
