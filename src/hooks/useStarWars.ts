@@ -1,14 +1,14 @@
 import { useEffect, useState, useMemo } from 'react';
 import { getPeople } from '../services/starwars.api';
-import { PeopleResponse, Person } from '../../types';
+import { Person } from '../../types';
 
 const useStarWars = () => {
   const [peopleList, setPeopleList] = useState<Array<Person>>([]);
   const [page, setPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(1);
-  const [hasPeople, setHasPeople] = useState<boolean>(false);
+  const [hasPeople, setHasPeople] = useState<boolean>(true);
 
-  const removePerson = (name: string) => {};
+  const removePerson = (index: number) => peopleList.splice(index, 1);
   const personsCache = useMemo(
     () =>
       new Promise<Person[]>(async (resolve, reject) => {
@@ -31,7 +31,13 @@ const useStarWars = () => {
   useEffect(() => {
     if (peopleList.length < total)
       personsCache.then((newList) =>
-        setPeopleList((current) => current.concat(newList))
+        setPeopleList((current) =>
+          current.concat(newList).sort((first, second) => {
+            if (first.name > second.name) return 1;
+            if (first.name < second.name) return -1;
+            return 0;
+          })
+        )
       );
   }, [page]);
 
