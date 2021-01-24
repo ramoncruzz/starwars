@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
-import { FlatList, SafeAreaView } from 'react-native';
+import { FlatList, SafeAreaView, ActivityIndicator, View } from 'react-native';
 import styles from './styles';
 import Item from '../../../components/Item';
 import useStarWars from '../../hooks/useStarWars';
 
 const TabTwoScreen = () => {
-  const { peopleList, removePerson, nextPage } = useStarWars();
+  const { peopleList, removePerson, nextPage, isLoading } = useStarWars();
   const [page, setPage] = useState<number>(1);
   return (
     <SafeAreaView style={styles.container}>
-      {!!peopleList && (
+      {isLoading && (
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <ActivityIndicator size="large" />
+        </View>
+      )}
+      {!isLoading && (
         <FlatList
           style={{ width: '100%', flex: 1, alignSelf: 'center' }}
           data={peopleList}

@@ -7,6 +7,7 @@ const useStarWars = () => {
   const [page, nextPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(1);
   const [hasPeople, setHasPeople] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const removePerson = (index: number) => {
     const _peopleList = peopleList.filter((_item, idx) => index !== idx);
@@ -19,7 +20,10 @@ const useStarWars = () => {
         try {
           if (hasPeople) {
             const { count, next, results } = await getPeople(page);
-            if (total === 1) setTotal(count);
+            if (total === 1) {
+              setTotal(count);
+              setIsLoading(false);
+            }
             setHasPeople(!!next);
             resolve(results);
           } else {
@@ -45,6 +49,6 @@ const useStarWars = () => {
       );
   }, [page]);
 
-  return { peopleList, nextPage, removePerson };
+  return { peopleList, nextPage, removePerson, isLoading };
 };
 export default useStarWars;
