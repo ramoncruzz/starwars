@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { TextInput, Button, View, Text } from 'react-native';
+import {
+  TextInput,
+  Button,
+  View,
+  ScrollView,
+  Text,
+  SafeAreaView,
+} from 'react-native';
 import styles from './styles';
 import { findOcurrencies } from '../../utils/functions';
 
@@ -15,7 +22,7 @@ const Item: React.FC<{ term: string; ocurrencies: number }> = ({
 );
 
 const ItemContainer: React.FC = ({ children }): JSX.Element => (
-  <View style={styles.itemContainer}>{children}</View>
+  <ScrollView style={styles.itemContainer}>{children}</ScrollView>
 );
 
 const TabOneScreen: React.FC = (): JSX.Element => {
@@ -25,7 +32,7 @@ const TabOneScreen: React.FC = (): JSX.Element => {
     !!text ? setOcurrencyList(findOcurrencies(text)) : setOcurrencyList([]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Type some text below</Text>
       <TextInput
         multiline
@@ -43,7 +50,7 @@ const TabOneScreen: React.FC = (): JSX.Element => {
           })}
         </ItemContainer>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 export default TabOneScreen;

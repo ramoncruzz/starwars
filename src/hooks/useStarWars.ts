@@ -4,18 +4,22 @@ import { Person } from '../../types';
 
 const useStarWars = () => {
   const [peopleList, setPeopleList] = useState<Array<Person>>([]);
-  const [page, setPage] = useState<number>(1);
+  const [page, nextPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(1);
   const [hasPeople, setHasPeople] = useState<boolean>(true);
 
-  const removePerson = (index: number) => peopleList.splice(index, 1);
+  const removePerson = (index: number) => {
+    const _peopleList = peopleList.filter((_item, idx) => index !== idx);
+    _peopleList.splice(index, 1);
+    setPeopleList(_peopleList);
+  };
   const personsCache = useMemo(
     () =>
       new Promise<Person[]>(async (resolve, reject) => {
         try {
           if (hasPeople) {
             const { count, next, results } = await getPeople(page);
-            if (!!!total) setTotal(count);
+            if (total === 1) setTotal(count);
             setHasPeople(!!next);
             resolve(results);
           } else {
@@ -41,6 +45,6 @@ const useStarWars = () => {
       );
   }, [page]);
 
-  return { peopleList, setPage, removePerson };
+  return { peopleList, nextPage, removePerson };
 };
 export default useStarWars;

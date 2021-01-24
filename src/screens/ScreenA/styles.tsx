@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     width: '90%',
+    marginBottom: 90,
     padding: 10,
     backgroundColor: 'white',
     shadowColor: '#000',

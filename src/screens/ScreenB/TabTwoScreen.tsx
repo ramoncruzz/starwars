@@ -1,18 +1,35 @@
-import React, { useEffect } from 'react';
-import { View } from '../../../components/Themed';
+import React, { useState } from 'react';
+import { FlatList, SafeAreaView } from 'react-native';
 import styles from './styles';
+import Item from '../../../components/Item';
 import useStarWars from '../../hooks/useStarWars';
-import { findOcurrencies } from '../../utils/functions';
 
 const TabTwoScreen = () => {
-  const { peopleList } = useStarWars();
-  useEffect(() => {
-    const teste = peopleList;
-    const ocurrencies = findOcurrencies(
-      'Atirei o pau no gato, mas o gato não morreu.'
-    );
-    debugger;
-  }, [peopleList]);
-  return <View style={styles.container}></View>;
+  const { peopleList, removePerson, nextPage } = useStarWars();
+  const [page, setPage] = useState<number>(1);
+  return (
+    <SafeAreaView style={styles.container}>
+      {!!peopleList.length && (
+        <FlatList
+          style={{ width: '100%', flex: 1, alignSelf: 'center' }}
+          data={peopleList}
+          extraData={peopleList.length}
+          renderItem={({ item, index }) => (
+            <Item
+              person={item}
+              key={index}
+              onDelete={() => removePerson(index)}
+            />
+          )}
+          keyExtractor={(item) => item.name}
+          onEndReachedThreshold={0.1}
+          onEndReached={() => {
+            setPage(page + 1);
+            nextPage(page + 1);
+          }}
+        />
+      )}
+    </SafeAreaView>
+  );
 };
 export default TabTwoScreen;
