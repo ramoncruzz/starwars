@@ -476,7 +476,7 @@ export const Page2 = {
   ],
 };
 
-export const page3 = {
+export const Page3 = {
   count: 82,
   next: 'http://swapi.dev/api/people/?page=3',
   previous: 'http://swapi.dev/api/people/?page=1',
