@@ -1,6 +1,7 @@
 # Estrutura de diretórios
 
 Este projeto foi configurado para a utlização de TypeScript e para obter a melhor organização possível do projeto `StarWars` está contém os seguintes diretórios:
+
 [`components`](./components):
 
 > Onde estão os códigos referentes a componentes visuais.
