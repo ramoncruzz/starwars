@@ -1,7 +1,9 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useStarWars from '../useStarWars';
+import renderer from 'react-test-renderer';
 import { PeopleResponse } from '../../../types';
 import { findOcurrencies } from '../../utils/functions';
+
 jest.mock('../../services/starwars.api', () => {
   const { Page1, Page2, Page3 } = require('../mocks/people.pages');
 
@@ -23,7 +25,7 @@ jest.mock('../../services/starwars.api', () => {
   };
 });
 
-describe('Tests of usetStarWars', () => {
+describe('Tests of useStarWars', () => {
   it('should get list of Person', async () => {
     const hookUseBoticario = Object.assign(useStarWars);
     const testingLibraryReturn = renderHook(() => hookUseBoticario());

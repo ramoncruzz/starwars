@@ -9,7 +9,7 @@ const TabTwoScreen = () => {
   const [page, setPage] = useState<number>(1);
   return (
     <SafeAreaView style={styles.container}>
-      {!!peopleList.length && (
+      {!!peopleList && (
         <FlatList
           style={{ width: '100%', flex: 1, alignSelf: 'center' }}
           data={peopleList}
