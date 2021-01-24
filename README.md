@@ -38,4 +38,5 @@ Este projeto foi configurado para a utlização de TypeScript e para obter a mel
 
 Ao baixar o projeto execute: `yarn install`.
 
-> [ios]: `yarn ios` > [android]: `yarn android`
+> - [ios]: `yarn ios`
+> - [android]: `yarn android`
